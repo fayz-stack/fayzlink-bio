@@ -156,7 +156,6 @@ function initializeLoginForm() {
   const submitButton = document.querySelector("#login-submit");
   const togglePassword = document.querySelector("#toggle-password");
 
-  // Fitur tampilkan/sembunyikan password.
   if (togglePassword && passwordInput) {
     togglePassword.addEventListener("click", () => {
       const isPasswordHidden = passwordInput.type === "password";
@@ -176,7 +175,7 @@ function initializeLoginForm() {
   }
 
   if (isAdminLoggedIn()) {
-    window.location.replace("./admin.html");
+    window.location.replace("admin.html");
     return;
   }
 
@@ -229,7 +228,7 @@ function initializeLoginForm() {
       return;
     }
 
-    window.location.assign("./admin.html");
+    window.location.assign("admin.html");
   });
 }
 
