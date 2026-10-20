@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="alternate"
+      href="atom.xml"
+      type="application/atom+xml"
+      title="Atom"
+    />
+    <link rel="stylesheet" href="index.css" />
+
+    <title>Masuk Admin — Muhammad Faishal Makarim</title>
+
+    <link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body class="login-page">
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <main class="login-container">
+      <a
+        class="login-back-link"
+        href="index.html"
+        aria-label="Kembali ke halaman fayzlink"
+      >
+        <span aria-hidden="true">←</span>
+        Kembali ke Fayzlink
+      </a>
+
+      <section class="login-card" aria-labelledby="login-title">
+        <div class="login-brand">
+          <div class="login-brand-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <rect x="4" y="10" width="16" height="11" rx="3" />
+              <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+              <circle cx="12" cy="15" r="1" />
+              <path d="M12 16v2" />
+            </svg>
+          </div>
+
+          <span class="section-label"> RUANG PRIBADI</span>
+        </div>
+
+        <header class="login-header">
+          <h1 id="login-title">Welcome back<span>.</span></h1>
+
+          <p>
+            Masuk ke panel administrator untuk mengelola tautan personal Fayz.
+          </p>
+        </header>
+
+        <form id="login-form" class="login-form">
+          <div class="login-field">
+            <label for="username">Nama Admin</label>
+
+            <input
+              id="username"
+              name="username"
+              type="text"
+              placeholder="Masukkan Nama Pengguna..."
+              autocomplete="username"
+              autocapitalize="none"
+              spellcheck="false"
+              maxlength="100"
+              required
+            />
+          </div>
+
+          <div class="login-field">
+            <label for="password">Kata Sandi</label>
+
+            <div class="password-wrapper">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Masukkan Kata Sandi..."
+                autocomplete="current-password"
+                required
+              />
+
+              <button
+                class="password-toggle"
+                id="toggle-password"
+                type="button"
+                aria-label="Tampilkan password"
+                aria-pressed="false"
+              >
+                Tampilkan
+              </button>
+            </div>
+          </div>
+
+          <p
+            id="login-message"
+            class="login-message"
+            role="alert"
+            aria-live="polite"
+            hidden
+          ></p>
+
+          <button class="login-submit" id="login-submit" type="submit">
+            <span>Masuk ke Dasbor Admin!</span>
+            <span aria-hidden="true">↗</span>
+          </button>
+        </form>
+
+        <div class="login-divider">
+          <span></span>
+          <p>AKSES ADMIN</p>
+          <span></span>
+        </div>
+
+        <p class="login-security-note">
+          <span aria-hidden="true">◈</span>
+          Area pengelolaan personal
+        </p>
+      </section>
+
+      <footer class="login-footer">
+        <span>© 2026 Muhammad Faishal Makarim</span>
+      </footer>
+    </main>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
