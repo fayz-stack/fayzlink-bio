@@ -1,1 +1,16 @@
-
+{
+  "version": 1,
+  "links": [
+    {
+      "id": "link-001",
+      "title": "Portfolio",
+      "description": "Kumpulan proyek saya",
+      "url": "https://example.com",
+      "icon": "link",
+      "category": "Portfolio",
+      "featured": true,
+      "active": true,
+      "order": 1
+    }
+  ]
+}
