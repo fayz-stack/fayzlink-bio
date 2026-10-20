@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101918" />
+
+    <title>Admin Dashboard — Biolink</title>
+
+    <link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body class="admin-page">
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <main class="admin-shell">
+      <aside class="admin-sidebar">
+        <a class="admin-brand" href="index.html">
+          <span class="admin-brand-mark" aria-hidden="true">B.</span>
+          <span class="admin-brand-copy">
+            <strong>BioLink</strong>
+            <small>PERSONAL SPACE</small>
+          </span>
+        </a>
+
+        <div class="admin-sidebar-label">WORKSPACE</div>
+
+        <nav class="admin-navigation" aria-label="Navigasi dashboard">
+          <a class="admin-nav-item is-active" href="#overview">
+            <span class="admin-nav-icon" aria-hidden="true">▦</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a class="admin-nav-item" href="#manage-links">
+            <span class="admin-nav-icon" aria-hidden="true">↗</span>
+            <span>Kelola Tautan</span>
+          </a>
+
+          <a
+            class="admin-nav-item"
+            href="index.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="admin-nav-icon" aria-hidden="true">◉</span>
+            <span>Lihat Biolink</span>
+          </a>
+        </nav>
+
+        <div class="admin-sidebar-bottom">
+          <div class="admin-profile">
+            <div class="admin-avatar" aria-hidden="true">FM</div>
+
+            <div class="admin-profile-info">
+              <strong>Administrator</strong>
+              <span>Personal Account</span>
+            </div>
+
+            <span class="admin-status-dot" title="Sesi aktif"></span>
+          </div>
+
+          <button class="admin-logout-button" id="admin-logout" type="button">
+            <span aria-hidden="true">↪</span>
+            Keluar dari Dashboard
+          </button>
+        </div>
+      </aside>
+
+      <section class="admin-main">
+        <header class="admin-topbar">
+          <div class="admin-breadcrumb">
+            <span>Workspace</span>
+            <span aria-hidden="true">/</span>
+            <strong>Dashboard</strong>
+          </div>
+
+          <a
+            class="admin-preview-button"
+            href="index.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span aria-hidden="true">↗</span>
+            Preview Biolink
+          </a>
+        </header>
+
+        <!-- PAGE HEADING -->
+        <section class="admin-page-heading" id="overview">
+          <div>
+            <p class="admin-eyebrow">PERSONAL LINK MANAGEMENT</p>
+            <h1>Dashboard<span>.</span></h1>
+            <p class="admin-heading-description">
+              Kelola dan atur semua tautan personal Anda dalam satu tempat.
+            </p>
+          </div>
+
+          <button
+            class="admin-primary-button"
+            id="add-link-shortcut"
+            type="button"
+          >
+            <span aria-hidden="true">＋</span>
+            Tambah Tautan
+          </button>
+        </section>
+
+        <section class="admin-stats" aria-label="Ringkasan tautan">
+          <article class="admin-stat-card">
+            <div class="admin-stat-top">
+              <span class="admin-stat-label">Total Tautan</span>
+              <span class="admin-stat-icon" aria-hidden="true">↗</span>
+            </div>
+            <strong class="admin-stat-value" id="stat-total">0</strong>
+            <span class="admin-stat-caption">Seluruh tautan tersimpan</span>
+          </article>
+
+          <article class="admin-stat-card">
+            <div class="admin-stat-top">
+              <span class="admin-stat-label">Tautan Aktif</span>
+              <span class="admin-stat-icon is-positive" aria-hidden="true"
+                >✓</span
+              >
+            </div>
+            <strong class="admin-stat-value" id="stat-active">0</strong>
+            <span class="admin-stat-caption"
+              >Ditampilkan pada halaman publik</span
+            >
+          </article>
+
+          <article class="admin-stat-card">
+            <div class="admin-stat-top">
+              <span class="admin-stat-label">Tautan Unggulan</span>
+              <span class="admin-stat-icon is-featured" aria-hidden="true"
+                >★</span
+              >
+            </div>
+            <strong class="admin-stat-value" id="stat-featured">0</strong>
+            <span class="admin-stat-caption"
+              >Ditandai sebagai tautan unggulan</span
+            >
+          </article>
+        </section>
+
+        <div
+          class="admin-notice"
+          id="admin-notice"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></div>
+
+        <section class="admin-content-panel" id="manage-links">
+          <div class="admin-panel-heading">
+            <div>
+              <p class="admin-eyebrow">CONTENT MANAGEMENT</p>
+              <h2>Daftar Tautan</h2>
+              <p class="admin-panel-description">
+                Tambah, edit, atur urutan, atau nonaktifkan tautan Anda.
+              </p>
+            </div>
+          </div>
+
+          <div class="admin-toolbar">
+            <label class="admin-search-box" for="admin-search">
+              <span aria-hidden="true">⌕</span>
+              <input
+                type="search"
+                id="admin-search"
+                placeholder="Cari judul atau kategori..."
+                autocomplete="off"
+              />
+            </label>
+
+            <label class="admin-filter-box" for="admin-filter">
+              <span class="sr-only">Filter tautan</span>
+              <select id="admin-filter">
+                <option value="all">Semua tautan</option>
+                <option value="active">Tautan aktif</option>
+                <option value="inactive">Tautan nonaktif</option>
+                <option value="featured">Tautan unggulan</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="admin-link-list" id="admin-link-list"></div>
+
+          <div class="admin-empty-state" id="admin-empty-state" hidden>
+            <div class="admin-empty-icon" aria-hidden="true">↗</div>
+            <h3 id="admin-empty-title">Belum ada tautan</h3>
+            <p id="admin-empty-description">
+              Tambahkan tautan pertama untuk mulai mengelola halaman biolink
+              Anda.
+            </p>
+            <button
+              class="admin-primary-button"
+              id="empty-add-link"
+              type="button"
+            >
+              ＋ Tambah Tautan
+            </button>
+          </div>
+
+          <footer class="admin-list-footer">
+            <span id="admin-list-count">Menampilkan 0 tautan</span>
+            <span>Perubahan tersimpan di browser ini</span>
+          </footer>
+        </section>
+
+        <footer class="admin-footer">
+          <span>© 2026 Personal Biolink</span>
+        </footer>
+      </section>
+    </main>
+
+    <div class="admin-modal-backdrop" id="link-modal" hidden>
+      <section
+        class="admin-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="link-modal-title"
+      >
+        <header class="admin-modal-header">
+          <div>
+            <p class="admin-eyebrow">LINK CONFIGURATION</p>
+            <h2 id="link-modal-title">Tambah Tautan</h2>
+            <p>Lengkapi informasi tautan yang akan dikelola.</p>
+          </div>
+
+          <button
+            class="admin-modal-close"
+            id="close-link-modal"
+            type="button"
+            aria-label="Tutup formulir"
+          >
+            ×
+          </button>
+        </header>
+
+        <form id="admin-link-form">
+          <input type="hidden" id="link-id" />
+
+          <div class="admin-form-field">
+            <label for="link-title">Judul Tautan <span>*</span></label>
+            <input
+              type="text"
+              id="link-title"
+              name="title"
+              placeholder="Contoh: Portfolio Design"
+              maxlength="100"
+              required
+            />
+            <small>Gunakan judul singkat dan mudah dikenali.</small>
+          </div>
+
+          <div class="admin-form-field">
+            <label for="link-url">URL Tautan <span>*</span></label>
+            <input
+              type="text"
+              id="link-url"
+              name="url"
+              placeholder="https://example.com"
+              required
+            />
+            <small>Gunakan URL lengkap, atau format mailto: untuk email.</small>
+          </div>
+
+          <div class="admin-form-field">
+            <label for="link-description">Deskripsi</label>
+            <textarea
+              id="link-description"
+              name="description"
+              rows="3"
+              maxlength="250"
+              placeholder="Jelaskan tujuan tautan ini secara singkat..."
+            ></textarea>
+            <small>Maksimal 250 karakter.</small>
+          </div>
+
+          <div class="admin-form-grid">
+            <div class="admin-form-field">
+              <label for="link-category">Kategori</label>
+              <input
+                type="text"
+                id="link-category"
+                name="category"
+                maxlength="50"
+                placeholder="Contoh: Portfolio"
+              />
+            </div>
+
+            <div class="admin-form-field">
+              <label for="link-icon">Ikon</label>
+              <select id="link-icon" name="icon">
+                <option value="link">Link umum</option>
+                <option value="behance">Behance</option>
+                <option value="github">GitHub</option>
+                <option value="linkedin">LinkedIn</option>
+                <option value="mail">Email</option>
+                <option value="palette">Design</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="admin-form-field">
+            <label for="link-order">Urutan Tampil</label>
+            <input
+              type="number"
+              id="link-order"
+              name="order"
+              min="1"
+              step="1"
+              value="1"
+              required
+            />
+          </div>
+
+          <div class="admin-toggle-group">
+            <label class="admin-toggle-option" for="link-active">
+              <span>
+                <strong>Tautan aktif</strong>
+                <small>Tampilkan tautan pada halaman publik.</small>
+              </span>
+              <input type="checkbox" id="link-active" checked />
+              <span class="admin-toggle-switch" aria-hidden="true"></span>
+            </label>
+
+            <label class="admin-toggle-option" for="link-featured">
+              <span>
+                <strong>Tautan unggulan</strong>
+                <small>Tandai sebagai tautan pilihan.</small>
+              </span>
+              <input type="checkbox" id="link-featured" />
+              <span class="admin-toggle-switch" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <p
+            class="admin-form-message"
+            id="admin-form-message"
+            role="alert"
+            hidden
+          ></p>
+
+          <div class="admin-modal-actions">
+            <button
+              class="admin-secondary-button"
+              id="cancel-link-form"
+              type="button"
+            >
+              Batal
+            </button>
+            <button
+              class="admin-primary-button"
+              id="save-link-button"
+              type="submit"
+            >
+              Simpan Tautan
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div class="admin-modal-backdrop" id="delete-modal" hidden>
+      <section
+        class="admin-modal admin-delete-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="delete-modal-title"
+      >
+        <div class="admin-delete-icon" aria-hidden="true">!</div>
+        <h2 id="delete-modal-title">Hapus tautan?</h2>
+        <p>
+          Tautan <strong id="delete-link-name"></strong> akan dihapus dari
+          penyimpanan browser ini. Tindakan ini tidak dapat dibatalkan.
+        </p>
+
+        <div class="admin-modal-actions">
+          <button
+            class="admin-secondary-button"
+            id="cancel-delete"
+            type="button"
+          >
+            Batal
+          </button>
+          <button class="admin-danger-button" id="confirm-delete" type="button">
+            Ya, Hapus
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+
+    <script>
+      (() => {
+        "use strict";
+
+        const $ = (selector) => document.querySelector(selector);
+
+        const elements = {
+          list: $("#admin-link-list"),
+          empty: $("#admin-empty-state"),
+          emptyTitle: $("#admin-empty-title"),
+          emptyDescription: $("#admin-empty-description"),
+          listCount: $("#admin-list-count"),
+          search: $("#admin-search"),
+          filter: $("#admin-filter"),
+          notice: $("#admin-notice"),
+          form: $("#admin-link-form"),
+          formMessage: $("#admin-form-message"),
+          modal: $("#link-modal"),
+          deleteModal: $("#delete-modal"),
+          saveButton: $("#save-link-button"),
+          deleteName: $("#delete-link-name"),
+        };
+
+        let pendingDeleteId = null;
+        let noticeTimer = null;
+
+        function escapeText(value) {
+          return String(value ?? "");
+        }
+
+        function showNotice(message, type = "success") {
+          elements.notice.textContent = message;
+          elements.notice.className = "admin-notice is-visible " + type;
+          elements.notice.hidden = false;
+
+          window.clearTimeout(noticeTimer);
+          noticeTimer = window.setTimeout(() => {
+            elements.notice.hidden = true;
+          }, 4000);
+        }
+
+        function showFormMessage(message) {
+          elements.formMessage.textContent = message;
+          elements.formMessage.hidden = false;
+        }
+
+        function clearFormMessage() {
+          elements.formMessage.textContent = "";
+          elements.formMessage.hidden = true;
+        }
+
+        function getLinks() {
+          return window.BioLink.getAllLinks();
+        }
+
+        function getFilteredLinks() {
+          const query = elements.search.value.trim().toLowerCase();
+          const filter = elements.filter.value;
+
+          return getLinks()
+            .filter((link) => {
+              const searchable = [
+                link.title,
+                link.description,
+                link.category,
+                link.url,
+              ]
+                .join(" ")
+                .toLowerCase();
+
+              const matchesQuery = !query || searchable.includes(query);
+
+              let matchesFilter = true;
+
+              if (filter === "active") matchesFilter = link.active === true;
+              if (filter === "inactive") matchesFilter = link.active !== true;
+              if (filter === "featured") matchesFilter = link.featured === true;
+
+              return matchesQuery && matchesFilter;
+            })
+            .sort((a, b) => {
+              const orderA = Number(a.order) || 0;
+              const orderB = Number(b.order) || 0;
+
+              return (
+                orderA - orderB ||
+                String(a.title).localeCompare(String(b.title))
+              );
+            });
+        }
+
+        function createTextElement(tag, className, text) {
+          const element = document.createElement(tag);
+          if (className) element.className = className;
+          element.textContent = escapeText(text);
+          return element;
+        }
+
+        function createActionButton(label, className, action, accessibleLabel) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = className;
+          button.textContent = label;
+          button.setAttribute("aria-label", accessibleLabel);
+          button.addEventListener("click", action);
+          return button;
+        }
+
+        function createLinkRow(link, index, visibleLinks) {
+          const row = document.createElement("article");
+          row.className = "admin-link-row";
+
+          const icon = createTextElement(
+            "div",
+            "admin-link-row-icon",
+            {
+              behance: "Bē",
+              github: "GH",
+              linkedin: "in",
+              mail: "✉",
+              palette: "✳",
+              link: "↗",
+            }[link.icon] || "↗",
+          );
+          icon.setAttribute("aria-hidden", "true");
+
+          const content = document.createElement("div");
+          content.className = "admin-link-row-content";
+
+          const titleLine = document.createElement("div");
+          titleLine.className = "admin-link-row-title-line";
+
+          const title = createTextElement("h3", "admin-link-title", link.title);
+          titleLine.appendChild(title);
+
+          if (link.featured) {
+            titleLine.appendChild(
+              createTextElement("span", "admin-featured-badge", "★ Unggulan"),
+            );
+          }
+
+          const url = createTextElement("p", "admin-link-url", link.url);
+          url.title = link.url;
+
+          const metadata = document.createElement("div");
+          metadata.className = "admin-link-metadata";
+          metadata.appendChild(
+            createTextElement(
+              "span",
+              "admin-category-tag",
+              link.category || "Tanpa kategori",
+            ),
+          );
+          metadata.appendChild(
+            createTextElement(
+              "span",
+              link.active
+                ? "admin-status-tag is-active"
+                : "admin-status-tag is-inactive",
+              link.active ? "Aktif" : "Nonaktif",
+            ),
+          );
+
+          content.append(titleLine, url, metadata);
+
+          const actions = document.createElement("div");
+          actions.className = "admin-link-actions";
+
+          const moveUp = createActionButton(
+            "↑",
+            "admin-icon-button",
+            () => moveLink(index, -1),
+            "Pindahkan tautan ke atas",
+          );
+          const moveDown = createActionButton(
+            "↓",
+            "admin-icon-button",
+            () => moveLink(index, 1),
+            "Pindahkan tautan ke bawah",
+          );
+          const edit = createActionButton(
+            "Edit",
+            "admin-edit-button",
+            () => openEditModal(link.id),
+            "Edit " + link.title,
+          );
+          const remove = createActionButton(
+            "Hapus",
+            "admin-remove-button",
+            () => openDeleteModal(link),
+            "Hapus " + link.title,
+          );
+
+          moveUp.disabled = index === 0;
+          moveDown.disabled = index === visibleLinks.length - 1;
+
+          actions.append(moveUp, moveDown, edit, remove);
+          row.append(icon, content, actions);
+
+          return row;
+        }
+
+        function renderDashboard() {
+          const allLinks = getLinks();
+          const visibleLinks = getFilteredLinks();
+
+          $("#stat-total").textContent = allLinks.length;
+          $("#stat-active").textContent = allLinks.filter(
+            (link) => link.active === true,
+          ).length;
+          $("#stat-featured").textContent = allLinks.filter(
+            (link) => link.featured === true,
+          ).length;
+
+          elements.list.replaceChildren();
+
+          visibleLinks.forEach((link, index) => {
+            elements.list.appendChild(createLinkRow(link, index, visibleLinks));
+          });
+
+          const hasResults = visibleLinks.length > 0;
+          elements.empty.hidden = hasResults;
+          elements.list.hidden = !hasResults;
+
+          if (!hasResults) {
+            const hasAnyLinks = allLinks.length > 0;
+
+            elements.emptyTitle.textContent = hasAnyLinks
+              ? "Tautan tidak ditemukan"
+              : "Belum ada tautan";
+
+            elements.emptyDescription.textContent = hasAnyLinks
+              ? "Coba ubah kata kunci pencarian atau filter yang digunakan."
+              : "Tambahkan tautan pertama untuk mulai mengelola halaman biolink.";
+
+            $("#empty-add-link").hidden = hasAnyLinks;
+          }
+
+          elements.listCount.textContent =
+            "Menampilkan " +
+            visibleLinks.length +
+            " dari " +
+            allLinks.length +
+            " tautan";
+
+          if (typeof window.BioLink.renderPublicLinks === "function") {
+            window.BioLink.renderPublicLinks();
+          }
+        }
+
+        function openAddModal() {
+          elements.form.reset();
+          $("#link-id").value = "";
+          $("#link-active").checked = true;
+          $("#link-featured").checked = false;
+          $("#link-order").value = String(getLinks().length + 1);
+          $("#link-modal-title").textContent = "Tambah Tautan";
+          elements.saveButton.textContent = "Simpan Tautan";
+          clearFormMessage();
+
+          elements.modal.hidden = false;
+          document.body.classList.add("admin-modal-open");
+          $("#link-title").focus();
+        }
+
+        function openEditModal(id) {
+          const link = window.BioLink.getLinkById(id);
+
+          if (!link) {
+            showNotice(
+              "Tautan tidak ditemukan. Daftar telah diperbarui.",
+              "error",
+            );
+            renderDashboard();
+            return;
+          }
+
+          $("#link-id").value = link.id;
+          $("#link-title").value = link.title || "";
+          $("#link-url").value = link.url || "";
+          $("#link-description").value = link.description || "";
+          $("#link-category").value = link.category || "";
+          $("#link-icon").value = link.icon || "link";
+          $("#link-order").value = String(link.order || 1);
+          $("#link-active").checked = link.active === true;
+          $("#link-featured").checked = link.featured === true;
+
+          $("#link-modal-title").textContent = "Edit Tautan";
+          elements.saveButton.textContent = "Simpan Perubahan";
+          clearFormMessage();
+
+          elements.modal.hidden = false;
+          document.body.classList.add("admin-modal-open");
+          $("#link-title").focus();
+        }
+
+        function closeLinkModal() {
+          elements.modal.hidden = true;
+          document.body.classList.remove("admin-modal-open");
+          clearFormMessage();
+        }
+
+        function handleSaveLink(event) {
+          event.preventDefault();
+          clearFormMessage();
+
+          const id = $("#link-id").value.trim();
+          const linkData = {
+            title: $("#link-title").value.trim(),
+            url: $("#link-url").value.trim(),
+            description: $("#link-description").value.trim(),
+            category: $("#link-category").value.trim(),
+            icon: $("#link-icon").value,
+            order: Number($("#link-order").value),
+            active: $("#link-active").checked,
+            featured: $("#link-featured").checked,
+          };
+
+          if (!linkData.title) {
+            showFormMessage("Judul tautan wajib diisi.");
+            $("#link-title").focus();
+            return;
+          }
+
+          if (!linkData.url) {
+            showFormMessage("URL tautan wajib diisi.");
+            $("#link-url").focus();
+            return;
+          }
+
+          if (!Number.isInteger(linkData.order) || linkData.order < 1) {
+            showFormMessage(
+              "Urutan tampil harus berupa bilangan bulat minimal 1.",
+            );
+            $("#link-order").focus();
+            return;
+          }
+
+          const validation = window.BioLink.validateLink(linkData);
+
+          if (validation !== true && validation !== undefined) {
+            if (typeof validation === "string") {
+              showFormMessage(validation);
+            } else if (validation && validation.valid === false) {
+              showFormMessage(validation.message || "Data tautan belum valid.");
+            } else {
+              //
+            }
+
+            if (
+              typeof validation === "string" ||
+              (validation && validation.valid === false)
+            ) {
+              return;
+            }
+          }
+
+          const beforeCount = getLinks().length;
+          let operationResult;
+
+          try {
+            operationResult = id
+              ? window.BioLink.updateLink(id, linkData)
+              : window.BioLink.addLink(linkData);
+          } catch (error) {
+            showFormMessage(
+              "Tautan gagal disimpan. Periksa data lalu coba lagi.",
+            );
+            return;
+          }
+
+          const afterLinks = getLinks();
+          const saved = id
+            ? afterLinks.some((link) => link.id === id)
+            : afterLinks.length > beforeCount;
+
+          if (!saved || operationResult === false || operationResult === null) {
+            showFormMessage(
+              "Tautan belum berhasil disimpan. Periksa URL dan data yang dimasukkan.",
+            );
+            return;
+          }
+
+          closeLinkModal();
+          renderDashboard();
+          showNotice(
+            id
+              ? "Perubahan tautan berhasil disimpan."
+              : "Tautan baru berhasil ditambahkan.",
+          );
+        }
+
+        function moveLink(index, direction) {
+          const links = getFilteredLinks();
+          const targetIndex = index + direction;
+
+          if (targetIndex < 0 || targetIndex >= links.length) return;
+
+          const allLinks = getLinks()
+            .slice()
+            .sort((a, b) => {
+              return (Number(a.order) || 0) - (Number(b.order) || 0);
+            });
+
+          const currentId = links[index].id;
+          const targetId = links[targetIndex].id;
+          const currentPosition = allLinks.findIndex(
+            (link) => link.id === currentId,
+          );
+          const targetPosition = allLinks.findIndex(
+            (link) => link.id === targetId,
+          );
+
+          if (currentPosition < 0 || targetPosition < 0) return;
+
+          [allLinks[currentPosition], allLinks[targetPosition]] = [
+            allLinks[targetPosition],
+            allLinks[currentPosition],
+          ];
+
+          const orderedIds = allLinks.map((link) => link.id);
+
+          try {
+            window.BioLink.reorderLinks(orderedIds);
+            renderDashboard();
+            showNotice("Urutan tautan berhasil diperbarui.");
+          } catch (error) {
+            showNotice("Urutan tautan gagal diperbarui.", "error");
+          }
+        }
+
+        function openDeleteModal(link) {
+          pendingDeleteId = link.id;
+          elements.deleteName.textContent = link.title;
+          elements.deleteModal.hidden = false;
+          document.body.classList.add("admin-modal-open");
+          $("#confirm-delete").focus();
+        }
+
+        function closeDeleteModal() {
+          pendingDeleteId = null;
+          elements.deleteModal.hidden = true;
+          document.body.classList.remove("admin-modal-open");
+        }
+
+        function confirmDelete() {
+          if (!pendingDeleteId) return;
+
+          const link = window.BioLink.getLinkById(pendingDeleteId);
+
+          if (!link) {
+            closeDeleteModal();
+            renderDashboard();
+            showNotice("Tautan tidak ditemukan.", "error");
+            return;
+          }
+
+          let result;
+
+          try {
+            result = window.BioLink.deleteLink(pendingDeleteId);
+          } catch (error) {
+            showNotice("Tautan gagal dihapus.", "error");
+            return;
+          }
+
+          const stillExists = getLinks().some(
+            (item) => item.id === pendingDeleteId,
+          );
+
+          if (stillExists || result === false || result === null) {
+            showNotice("Tautan gagal dihapus. Silakan coba lagi.", "error");
+            return;
+          }
+
+          closeDeleteModal();
+          renderDashboard();
+          showNotice("Tautan berhasil dihapus.");
+        }
+
+        function initializeDashboard() {
+          if (!window.BioLink) {
+            document.body.innerHTML =
+              "<main style='max-width:640px;margin:80px auto;padding:24px;font-family:sans-serif'>" +
+              "<h1>Dashboard tidak dapat dimuat</h1>" +
+              "<p>Pastikan file app.js tersedia di folder yang sama dengan admin.html.</p>" +
+              "<a href='masuk.html'>Kembali ke halaman login</a></main>";
+            return;
+          }
+
+          if (!window.BioLink.isAdminLoggedIn()) {
+            window.location.replace("masuk.html");
+            return;
+          }
+
+          $("#add-link-shortcut").addEventListener("click", openAddModal);
+          $("#empty-add-link").addEventListener("click", openAddModal);
+          $("#close-link-modal").addEventListener("click", closeLinkModal);
+          $("#cancel-link-form").addEventListener("click", closeLinkModal);
+          $("#cancel-delete").addEventListener("click", closeDeleteModal);
+          $("#confirm-delete").addEventListener("click", confirmDelete);
+          elements.form.addEventListener("submit", handleSaveLink);
+          elements.search.addEventListener("input", renderDashboard);
+          elements.filter.addEventListener("change", renderDashboard);
+
+          elements.modal.addEventListener("click", (event) => {
+            if (event.target === elements.modal) closeLinkModal();
+          });
+
+          elements.deleteModal.addEventListener("click", (event) => {
+            if (event.target === elements.deleteModal) closeDeleteModal();
+          });
+
+          document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+              closeLinkModal();
+              closeDeleteModal();
+            }
+          });
+
+          renderDashboard();
+        }
+
+        initializeDashboard();
+      })();
+    </script>
+  </body>
+</html>
