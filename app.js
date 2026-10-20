@@ -175,7 +175,7 @@ function initializeLoginForm() {
   }
 
   if (isAdminLoggedIn()) {
-    window.location.replace("admin.html");
+    window.location.replace("./admin.html");
     return;
   }
 
@@ -217,7 +217,7 @@ function initializeLoginForm() {
     if (!sessionStarted) {
       if (loginMessage) {
         loginMessage.textContent =
-          "Sesi login gagal dibuat. Periksa pengaturan browser Anda.";
+          "Sesi masuk gagal dibuat. Periksa pengaturan browser Anda.";
         loginMessage.hidden = false;
       }
 
@@ -228,7 +228,7 @@ function initializeLoginForm() {
       return;
     }
 
-    window.location.assign("admin.html");
+    window.location.assign("./admin.html");
   });
 }
 
