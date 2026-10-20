@@ -2,11 +2,10 @@ name = "biolink-fayz-api"
 main = "src/index.js"
 compatibility_date = "2026-10-21"
 
-# Ganti nilainya sebelum deploy.
 [vars]
-GITHUB_OWNER = "GANTI_USERNAME_GITHUB"
-GITHUB_REPO = "GANTI_NAMA_REPOSITORY"
+GITHUB_OWNER = "fayzarden"
+GITHUB_REPO = "fayz-stack"
 GITHUB_BRANCH = "main"
 GITHUB_FILE_PATH = "data/links.json"
-SITE_ORIGIN = "https://GANTI_USERNAME_GITHUB.github.io"
+SITE_ORIGIN = "https://fayz-stack.github.io"
 
