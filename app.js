@@ -156,6 +156,7 @@ function initializeLoginForm() {
   const submitButton = document.querySelector("#login-submit");
   const togglePassword = document.querySelector("#toggle-password");
 
+  // Fitur tampilkan/sembunyikan password.
   if (togglePassword && passwordInput) {
     togglePassword.addEventListener("click", () => {
       const isPasswordHidden = passwordInput.type === "password";
@@ -217,7 +218,7 @@ function initializeLoginForm() {
     if (!sessionStarted) {
       if (loginMessage) {
         loginMessage.textContent =
-          "Sesi masuk gagal dibuat. Periksa pengaturan browser Anda.";
+          "Sesi login gagal dibuat. Periksa pengaturan browser Anda.";
         loginMessage.hidden = false;
       }
 
@@ -360,33 +361,17 @@ function readStoredData() {
   }
 }
 
-
 function writeStoredData(links) {
   const payload = {
     version: BioLinkConfig.storageVersion,
     links,
   };
 
-  let serialized;
-
   try {
-    serialized = JSON.stringify(payload);
+    localStorage.setItem(BioLinkConfig.storageKey, JSON.stringify(payload));
 
-    localStorage.setItem(
-      BioLinkConfig.storageKey,
-      serialized,
-    );
-
-    const saved = localStorage.getItem(
-      BioLinkConfig.storageKey,
-    );
-
-    if (saved !== serialized) {
-      throw new Error("Verifikasi penyimpanan gagal.");
-    }
-
-    memoryLinks = links.map((link) => ({ ...link }));
     storageAvailable = true;
+    memoryLinks = links;
 
     return true;
   } catch (error) {
@@ -395,72 +380,9 @@ function writeStoredData(links) {
     console.error("[BioLink] Gagal menyimpan data:", error);
 
     throw new Error(
-      "Tautan gagal disimpan. Periksa izin penyimpanan browser.",
+      "Data tidak dapat disimpan. Periksa pengaturan penyimpanan browser.",
     );
   }
-}
-
-
-function initializeAddLinkForm() {
-  const form = document.querySelector("#link-form");
-
-  if (!form) return;
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const submitButton = form.querySelector(
-      'button[type="submit"]',
-    );
-
-    const message = document.querySelector("#link-form-message");
-
-    if (submitButton) {
-      submitButton.disabled = true;
-    }
-
-    try {
-      const formData = new FormData(form);
-
-      const newLink = {
-        title: formData.get("title"),
-        description: formData.get("description"),
-        url: formData.get("url"),
-        icon: formData.get("icon") || "link",
-        category: formData.get("category") || "",
-        featured: form.elements.featured
-          ? form.elements.featured.checked
-          : false,
-        active: form.elements.active
-          ? form.elements.active.checked
-          : true,
-      };
-
-      const savedLink = window.BioLink.addLink(newLink);
-
-      if (message) {
-        message.textContent =
-          `Tautan "${savedLink.title}" berhasil disimpan.`;
-      }
-
-      form.reset();
-
-      if (typeof renderAdminLinks === "function") {
-        renderAdminLinks();
-      }
-    } catch (error) {
-      console.error("[BioLink] Gagal menambahkan tautan:", error);
-
-      if (message) {
-        message.textContent =
-          error.message || "Tautan gagal disimpan.";
-      }
-    } finally {
-      if (submitButton) {
-        submitButton.disabled = false;
-      }
-    }
-  });
 }
 
 function initializeStorage() {
@@ -778,7 +700,6 @@ function initializeBioLink() {
   renderPublicLinks();
   initializeLoginForm();
   initializeLogoutButton();
-  initializeAddLinkForm();
 
   console.info("[BioLink] Application initialized.");
 }
