@@ -15,8 +15,8 @@ const BioLinkConfig = Object.freeze({
 defaultLinks: [
   {
     id: "link-email",
-    title: "Get in Touch",
-    description: "Have an idea? Let's talk",
+    title: "Kontak Email",
+    description: "Kirim pesan atau sampaikan pertanyaan Anda",
     url: "mailto:mfaishalmakarim.id@gmail.com",
     icon: "mail",
     iconUrl:
