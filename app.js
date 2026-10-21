@@ -591,17 +591,37 @@ function createElement(tag, className, text = "") {
   return element;
 }
 
-function createIcon(iconName) {
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+function createIcon(iconName, iconUrl = "") {
+  if (typeof iconUrl === "string" && iconUrl.trim() !== "") {
+    const img = document.createElement("img");
+
+    img.src = iconUrl.trim();
+    img.alt = "";
+    img.setAttribute("aria-hidden", "true");
+    img.loading = "lazy";
+    img.decoding = "async";
+
+    img.addEventListener("error", () => {
+      img.replaceWith(createIcon(iconName, ""));
+    }, { once: true });
+
+    return img;
+  }
+
+  const svg = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
 
   svg.setAttribute("viewBox", "0 0 24 24");
   svg.setAttribute("aria-hidden", "true");
   svg.setAttribute("focusable", "false");
 
-  const safeIcon = Object.hasOwn(BioLinkIcons, iconName) ? iconName : "link";
+  const safeIcon = Object.hasOwn(BioLinkIcons, iconName)
+    ? iconName
+    : "link";
 
   const template = document.createElement("template");
-
   template.innerHTML = BioLinkIcons[safeIcon].trim();
 
   svg.appendChild(template.content.cloneNode(true));
@@ -624,7 +644,7 @@ function createLinkCard(link) {
 
   const iconWrapper = createElement("span", "link-icon");
 
-  iconWrapper.appendChild(createIcon(link.icon));
+  iconWrapper.appendChild(createIcon(link.icon, link.iconUrl));
 
   const content = createElement("span", "link-content");
 
