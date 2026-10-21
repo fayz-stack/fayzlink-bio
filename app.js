@@ -333,17 +333,36 @@ function validateLink(input, options = {}) {
     throw new Error("Ikon yang dipilih tidak tersedia.");
   }
 
-  return {
-    id: existingId || generateLinkId(),
-    title,
-    description,
-    url: urlResult.value,
-    icon,
-    category,
-    featured: normalizeBoolean(source.featured),
-    active: normalizeBoolean(source.active, true),
-    order: normalizeOrder(source.order),
-  };
+
+const iconUrl = normalizeText(source.iconUrl);
+
+if (iconUrl) {
+  let parsedIconUrl;
+
+  try {
+    parsedIconUrl = new URL(iconUrl);
+  } catch {
+    throw new Error("URL gambar ikon tidak valid.");
+  }
+
+  if (!["http:", "https:"].includes(parsedIconUrl.protocol)) {
+    throw new Error("URL gambar ikon harus menggunakan HTTP atau HTTPS.");
+  }
+}
+
+return {
+  id: existingId || generateLinkId(),
+  title,
+  description,
+  url: urlResult.value,
+  icon,
+  iconUrl,
+  category,
+  featured: normalizeBoolean(source.featured),
+  active: normalizeBoolean(source.active, true),
+  order: normalizeOrder(source.order),
+};
+
 }
 
 function readStoredData() {
