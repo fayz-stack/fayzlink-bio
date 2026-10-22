@@ -453,8 +453,6 @@ a:focus-visible {
   color: var(--color-primary-light);
 }
 
-/* Featured link */
-
 .featured-link {
   border-color: rgba(99, 216, 207, 0.28);
 
@@ -667,7 +665,6 @@ a:focus-visible {
 }
 
 /* ADMIN MASUK */
-
 .login-page {
   min-height: 100vh;
 }
